@@ -1,4 +1,4 @@
-#include <algorithm>
+//#include <algorithm>
 #include "Player.h"
 using namespace std;
 
@@ -113,7 +113,7 @@ void Player::addEvents(std::vector<std::string> newEvents) {
 
 void Player::removeEvents(std::vector<std::string> newEvents) {
     for (vector<string>::iterator it = events.begin(); it != events.end(); it++) {
-        events.erase(remove(events.begin(),events.end(),it),events.end());
+        events.erase(events.find(it),events.end());
     }
     /*for(int i = 0; i < newEvents.size(); i++) {
         for(vector<string>::iterator it = events.begin(); it != events.end(); ++it) {
@@ -125,7 +125,7 @@ void Player::removeEvents(std::vector<std::string> newEvents) {
 }
 
 void Player::printPlayer() {
-  cout << "bryan has a fake major" << endl;
+  cout << "bryan has a major" << endl;
 
   /*cout << Player::getFullName() << "\n" <<  Player::getGender() << "\n" <<  Player::getAge() << "\n" << 
              Player::getClub() << "\n" <<  Player::getPhone() << "\n" <<  Player::getEmail() << "\n" << 
