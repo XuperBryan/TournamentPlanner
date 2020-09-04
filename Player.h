@@ -28,10 +28,10 @@ class Player {
 		void setAge(int age);
 		void setClub(std::string club);
 		void setPhone(int phone);
-		void setEmail(std::string);
+		void setEmail(std::string email);
 		void setSeed(int seed);
-		void addEvents(std::vector<std::string>);
-		void removeEvents(std::vector<std::string>); 
+		void addEvents(std::vector<std::string> newEvents);
+		void removeEvents(std::vector<std::string> newEvents); 
 
 		void printPlayer();
 	private:
