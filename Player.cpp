@@ -74,35 +74,35 @@ std::vector<std::string> Player::getEvents() const {
 
 
 void Player::setFirstName(std::string name) {
-    firstName = name;
+    this->firstName = name;
 }
 
 void Player::setLastName(std::string name) {
-    lastName = name;
+    this->lastName = name;
 }
 
 void Player::setGender(std::string gender) {
-    gender = gender;
+    this->gender = gender;
 }
 
 void Player::setAge(int age) {
-    age = age;
+    this->age = age;
 }
 
 void Player::setClub(std::string club) {
-    club = club;
+    this->club = club;
 }
 
 void Player::setPhone(int phone) {
-    phone = phone;
+    this->phone = phone;
 }
 
 void Player::setEmail(std::string email) {
-    email = email;
+    this->email = email;
 }
 
 void Player::setSeed(int seed) {
-    seed = seed;
+    this->seed = seed;
 }
 
 void Player::addEvents(std::vector<std::string> newEvents) {
@@ -112,15 +112,15 @@ void Player::addEvents(std::vector<std::string> newEvents) {
 }
 
 void Player::removeEvents(std::vector<std::string> newEvents) {
-    for (vector<string>::iterator it = events.begin(); it != events.end(); it++) {
-        events.erase(events.find(it),events.end());
-    }
-    /*for(int i = 0; i < newEvents.size(); i++) {
-        for(vector<string>::iterator it = events.begin(); it != events.end(); ++it) {
-            if(newEvents.at(i) == events.at(*it))
-                events.erase(*it);
-        }
+    /*for (vector<string>::iterator it = events.begin(); it != events.end(); it++) {
+        events.erase(events.remove(it),events.end());
     }*/
+    for(int i = 0; i < newEvents.size(); i++) {
+        for(vector<string>::iterator it = events.begin(); it != events.end(); ++it) {
+            if(newEvents[i] == *it)
+                events.erase(it);
+        }
+    }
 
 }
 

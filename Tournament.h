@@ -14,7 +14,7 @@ public:
 	~Tournament();
 
     void printTournament();
-    void addEvent(string name, int size);
+    void addEvent(std::string name, int size);
     
 
 private:
