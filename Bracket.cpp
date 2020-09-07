@@ -14,7 +14,7 @@ Bracket::Bracket(const Bracket& orig){
 	event = orig.event;
 }
 
-~Bracket(){
+Bracket::~Bracket(){
 
 }
 
@@ -30,9 +30,9 @@ int Bracket::getSize(){
 void Bracket::makeRoundRobin(){
 	// size = 2, 3, 4, 5
 	// b.size() = n * n-1
-	for(int i = 0; i < p.length(); i++) {
-		for(int j = i+1; j < p.length(); j++) {
-			Bracket::Match m;
+	for(int i = 0; i < p.size(); i++) {
+		for(int j = i+1; j < p.size(); j++) {
+			Match m;
 			m.team1 = p[i];
 			m.team2 = p[j];
 			m.sets = 3;
