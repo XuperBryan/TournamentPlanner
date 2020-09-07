@@ -1,10 +1,9 @@
-//#include <algorithm>
 #include "Player.h"
 using namespace std;
 
 Player::Player(std::string firstName, std::string lastName, std::string gender, 
                 int age, std::string club, int phone, std::string email, 
-                int seed, std::vector<std::string> events) {
+                std::vector<std::string> events) {
     this->firstName = firstName;
     this->lastName = lastName;
     this->gender = gender;
@@ -12,7 +11,6 @@ Player::Player(std::string firstName, std::string lastName, std::string gender,
     this->club = club;
     this->phone = phone;
     this->email = email;
-    this->seed = seed;
     this->events = events;
 }
 
@@ -24,7 +22,6 @@ Player::Player(const Player& orig) {
     club = orig.club;
     phone = orig.phone;
     email = orig.email;
-    seed = orig.seed;
     events = orig.events;
 }
 
@@ -64,10 +61,6 @@ string Player::getEmail() const {
     return email;
 }
 
-int Player::getSeed() const {
-    return seed;
-}
-
 std::vector<std::string> Player::getEvents() const {
     return events;
 }
@@ -101,9 +94,6 @@ void Player::setEmail(std::string email) {
     this->email = email;
 }
 
-void Player::setSeed(int seed) {
-    this->seed = seed;
-}
 
 void Player::addEvents(std::vector<std::string> newEvents) {
     for(vector<string>::iterator it = newEvents.begin(); it != newEvents.end(); ++it) {
@@ -112,9 +102,6 @@ void Player::addEvents(std::vector<std::string> newEvents) {
 }
 
 void Player::removeEvents(std::vector<std::string> newEvents) {
-    /*for (vector<string>::iterator it = events.begin(); it != events.end(); it++) {
-        events.erase(events.remove(it),events.end());
-    }*/
     for(int i = 0; i < newEvents.size(); i++) {
         for(vector<string>::iterator it = events.begin(); it != events.end(); ++it) {
             if(newEvents[i] == *it)
@@ -125,11 +112,9 @@ void Player::removeEvents(std::vector<std::string> newEvents) {
 }
 
 void Player::printPlayer() {
-  cout << "bryan has a major" << endl;
+    cout << Player::getFullName() << "\n" <<  Player::getGender() << "\n" <<  Player::getAge() << "\n" << 
+            Player::getClub() << "\n" <<  Player::getPhone() << "\n" <<  Player::getEmail() << "\n" << 
+            Player::getSeed() << "\n" <<  Player::getEvents() << endl;
 
-  /*cout << Player::getFullName() << "\n" <<  Player::getGender() << "\n" <<  Player::getAge() << "\n" << 
-             Player::getClub() << "\n" <<  Player::getPhone() << "\n" <<  Player::getEmail() << "\n" << 
-             Player::getSeed() << "\n" <<  Player::getEvents() << endl;
-*/
 }    
 

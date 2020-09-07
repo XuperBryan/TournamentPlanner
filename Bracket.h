@@ -14,13 +14,19 @@ public:
 	~Bracket();
 	
 	std::string getEvent();
+	int getSize();
+	std::string getType();
 
-	void arrangeBracket();
+	void makeRoundRobin();
+	void makeElimination();
 	void insertPair(Player person1, Player person2);
 	void insertPlayer(Player person);
 	void progress();	// move players "up" the bracket, updates the bracket?
 	void setScore(std::vector<std::pair<int, int>> points, int matchNum);
 	void makeCons(std::vector<std::pair<Player, Player>>);
+	void setSeeds(std::vector<std::pair<Player, Player>>);
+
+
 private:
 	void shuffle();
 
@@ -36,5 +42,8 @@ private:
 	int entrants = 0;
 	std::string event;
 	std::vector<Match> b;
+	std::vector<std::pair<Player, Player>> p;
+	std::string type; // "roundRobin" or "elimination"
+	std::vector<std::pair<Player, Player>> seeds; 
 };
 #endif

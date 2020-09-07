@@ -7,7 +7,7 @@
 
 class Player {
 	public:
-		Player(std::string firstName, std::string lastName, std::string gender, int age, std::string club, int phone, std::string email, int seed, std::vector<std::string> events);
+		Player(std::string firstName, std::string lastName, std::string gender, int age, std::string club, int phone, std::string email, std::vector<std::string> events);
 		Player(const Player& orig);
 		~Player();
 
@@ -29,7 +29,6 @@ class Player {
 		void setClub(std::string club);
 		void setPhone(int phone);
 		void setEmail(std::string email);
-		void setSeed(int seed);
 		void addEvents(std::vector<std::string> newEvents);
 		void removeEvents(std::vector<std::string> newEvents); 
 
@@ -42,8 +41,9 @@ class Player {
 		int phone;
 		int age;
 		std::string email;
-		int seed;
 		std::vector<std::string> events;
+		/*int totalPoints = 0;
+		int matchesWon = 0;*/
 };
 
 
