@@ -7,6 +7,7 @@
 
 class Player {
 	public:
+		Player();
 		Player(std::string firstName, std::string lastName, std::string gender, int age, std::string club, int phone, std::string email, std::vector<std::string> events);
 		Player(const Player& orig);
 		~Player();
@@ -19,7 +20,6 @@ class Player {
 		std::string getClub() const;
 		int getPhone() const;
 		std::string getEmail() const;
-		int getSeed() const;
 		std::vector<std::string> getEvents() const;
 
 		void setFirstName(std::string name);
@@ -32,7 +32,7 @@ class Player {
 		void addEvents(std::vector<std::string> newEvents);
 		void removeEvents(std::vector<std::string> newEvents); 
 
-		void printPlayer();
+		friend std::ostream& operator<<(std::ostream& os, const Player& p);
 	private:
 		std::string firstName;
 		std::string lastName;

@@ -1,6 +1,17 @@
 #include "Player.h"
 using namespace std;
 
+Player::Player() {
+    this->firstName = "";
+    this->lastName = "";
+    this->gender = "";
+    this->age = 0;
+    this->club = "";
+    this->phone = 0;
+    this->email = "";
+    this->events = {""};
+}
+
 Player::Player(std::string firstName, std::string lastName, std::string gender, 
                 int age, std::string club, int phone, std::string email, 
                 std::vector<std::string> events) {
@@ -111,10 +122,13 @@ void Player::removeEvents(std::vector<std::string> newEvents) {
 
 }
 
-void Player::printPlayer() {
-    cout << Player::getFullName() << "\n" <<  Player::getGender() << "\n" <<  Player::getAge() << "\n" << 
-            Player::getClub() << "\n" <<  Player::getPhone() << "\n" <<  Player::getEmail() << "\n" << 
-            Player::getSeed() << "\n" <<  Player::getEvents() << endl;
-
-}    
-
+ostream& operator<<(ostream& os, const Player& p)
+{
+    // condition for checking missing information, also have labels
+    os << (p.getFullName()) << "\n" << (p.getGender()) << "\n" <<  (p.getAge()) << "\n" << (p.getClub()) << "\n" << (p.getPhone()) << "\n" <<  (p.getEmail()) << endl;
+    vector<string> temp = p.getEvents();
+    for (int i = 0; i < temp.size(); i++) {
+        os << temp[i] << '\n';
+    }
+    return os;
+}
