@@ -27,7 +27,7 @@ public:
 	void makeCons(std::vector<std::pair<Player*, Player*>>);
 	void setSeeds(std::vector<std::pair<Player*, Player*>>);
 	void printMatch(int num);
-
+    int seeding(int seed, int size);
 
 private:
 	void shuffle();

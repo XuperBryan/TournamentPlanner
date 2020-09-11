@@ -1,5 +1,6 @@
 #include "Bracket.h"
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ void Bracket::updateSize() {
 		size = p.size();
 	}
 	else {
-		size = p.size()-1;
+		size = pow(2, ceil(log(p.size())/log(2)));
 	}
 }
 
@@ -41,7 +42,8 @@ void Bracket::makeRoundRobin(){
 	// b.size() = n * n-1
 	Match m;
 	for(int i = 0; i < p.size(); i++) {
-		for(int j = i+1; j < p.size(); j++) {
+
+for(int j = i+1; j < p.size(); j++) {
 			m.team1 = p[i];
 			m.team2 = p[j];
 			m.sets = 3;
@@ -55,13 +57,63 @@ void Bracket::makeRoundRobin(){
 void Bracket::makeElimination(){
 	// size = 4, 8, 16, 32
 	// b.size() = <2, <4, <8, <16  
-	random_shuffle(p.begin(), p.end()); // shuffles the player*s
-	for(int i = 0; i < p.size(); i++){
+	
+    int byes = 0;
+    pair<Player*, Player*> bye;
 
+    if(size > p.size()) {
+        byes = size - p.size();
+    }
+
+    vector<pair<Player*, Player*>> firstMatches;
+
+
+    for(int i = 0; i < seeds.size(); i+=2) {
+        firstMatches.at(seeding(i, firstMatches.size())) = seeds.at(i);
+    }
+
+    for(int i = 0; i < p.size(); i++) {
+        for(int j = 0; j < seeds.size(); j++) {
+            if(p.at(i) == seeds.at(j)) {
+                p.erase(p.begin()+i);
+             }
+        }
+    }
+
+    while(byes > 0) {
+        for(int i = 0; i < firstMatches.size(); i++) {
+            if(!firstMatches[i].first) {
+                firstMatches.at(i) = bye;
+                byes--;
+            }
+        }
+    }
+
+    random_shuffle(p.begin(), p.end()); // shuffles the player*s
+
+    while(!p.empty()) {
+        for(int i = 0; i < firstMatches.size(); i++){
+            if(!firstMatches[i].first) {
+                firstMatches.at(i) = p.at(0);
+                p.erase(p.begin());
+            }
+        }
 	}
 
 	type = "elimination";
 }
+
+int Bracket::seeding(int seed, int size) {
+    if(seed <= 1)
+        return 0;
+
+    if(seed % 2 == 0) 
+        return size/2 + seeding(seed/2, size/2);
+
+    return seeding(seed/2+1, size/2);
+
+}
+    
 
 
 void Bracket::insertPair(Player* person1, Player* person2) {

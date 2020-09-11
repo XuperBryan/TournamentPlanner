@@ -25,18 +25,24 @@ int main(){
 	people[1].setFirstName("Daniel");
 	people[2].setFirstName("Nicole");
 	people[3].setFirstName("Martin");
+	people[4].setFirstName("Karissa");
+	people[5].setFirstName("Marc");
+	people[6].setFirstName("Tony");
+	people[7].setFirstName("Bryan");
 
 	Bracket AMS(0,"AMS");
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 8; i++) {
 		AMS.insertPlayer(&people[i]);
 	}
 
 	cout << AMS.getSize() << endl;
 
-	AMS.makeRoundRobin();
-	
-	for (int j = 0; j < 6; j++) {
+	//AMS.makeRoundRobin();
+
+    AMS.makeElimination();
+
+	for (int j = 0; j < 8; j++) {
 		AMS.printMatch(j);
 	}
 	return 0;
