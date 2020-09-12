@@ -67,21 +67,21 @@ void Bracket::makeElimination(){
 
     vector<pair<Player*, Player*>> firstMatches;
 
+    for(int w = 0; w < size; w++) {
+    	pair<Player*, Player*> temp(nullptr, nullptr);
+    	firstMatches.push_back(temp);
+    } 
 
-    for(int i = 0; i < seeds.size(); i+=2) {
-        firstMatches.at(seeding(i, firstMatches.size())) = seeds.at(i);
-    }
-
-    for(int i = 0; i < p.size(); i++) {
-        for(int j = 0; j < seeds.size(); j++) {
-            if(p.at(i) == seeds.at(j)) {
-                p.erase(p.begin()+i);
-             }
+    for(int i = 1; i < seeds.size(); i++) {
+        firstMatches.at(seeding(i, size)) = seeds.at(i);
+        if (byes > 0) {
+        	firstMatches.at(seeding(i, size)+1) = bye;
+        	byes--;
         }
     }
 
     while(byes > 0) {
-        for(int i = 0; i < firstMatches.size(); i++) {
+        for(int i = 0; i < firstMatches.size(); i+=2) {
             if(!firstMatches[i].first) {
                 firstMatches.at(i) = bye;
                 byes--;
@@ -91,27 +91,41 @@ void Bracket::makeElimination(){
 
     random_shuffle(p.begin(), p.end()); // shuffles the player*s
 
-    while(!p.empty()) {
+    for(int k = 0; k < p.size(); k++) {
         for(int i = 0; i < firstMatches.size(); i++){
-            if(!firstMatches[i].first) {
-                firstMatches.at(i) = p.at(0);
+            if(&firstMatches[i] != &bye && !(firstMatches[i].first)) {
+                firstMatches[i] = p[k];
                 p.erase(p.begin());
             }
         }
 	}
 
+	/*for(int t = 0; t < firstMatches.size(); t++) {
+		cout << firstMatches[t].first->getFirstName() << endl;
+	}*/
+
+	for (int p = 0; p < firstMatches.size(); p += 2) {
+		Match m;
+		m.team1.first = firstMatches[p].first;
+		m.team1.second = firstMatches[p].second;
+		m.team2.first = firstMatches[p+1].first;
+		m.team2.second = firstMatches[p+1].second;
+		m.sets = 3;
+		b.push_back(m);
+	}
+
 	type = "elimination";
+	return;
 }
 
-int Bracket::seeding(int seed, int size) {
+int Bracket::seeding(int seed, int tempSize) {
     if(seed <= 1)
         return 0;
 
     if(seed % 2 == 0) 
-        return size/2 + seeding(seed/2, size/2);
+        return tempSize/2 + seeding(seed/2, tempSize/2);
 
-    return seeding(seed/2+1, size/2);
-
+    return seeding(seed/2+1, tempSize/2);
 }
     
 
@@ -152,12 +166,24 @@ void Bracket::setScore(std::vector<std::pair<int, int>> points, int matchNum){
 	}*/
 }
 
-void Bracket::makeCons(std::vector<std::pair<Player*, Player*>>) {
+void Bracket::makeCons(std::vector<std::pair<Player*, Player*>> vect) {
 
 }	
 
-void Bracket::setSeeds(std::vector<std::pair<Player*, Player*>>) { // replaces entire vector of seeds with input
-
+void Bracket::setSeeds(std::vector<std::pair<Player*, Player*>> vect) { // replaces entire vector of seeds with input
+	pair<Player*, Player*> temp(nullptr, nullptr);
+	seeds.push_back(temp);
+	for (int w = 0; w < vect.size(); w++) {
+		seeds.push_back(vect[w]);
+	}
+	for(int i = 0; i < p.size(); i++) {
+        for(int j = 1; j < seeds.size(); j++) {
+            if(p[i].first == seeds[j].first) {
+                p.erase(p.begin()+i);
+            }
+        }
+    }
+	return;
 }
 
 void Bracket::printMatch(int num) {	// prints using the match number which signifies the index of the match in the bracket

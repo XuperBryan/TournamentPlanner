@@ -20,7 +20,7 @@ int main(){
 		cout << vects[j] << endl;
 	}*/
 
-	Player people [4];
+	Player people [8];
 	people[0].setFirstName("Henry");
 	people[1].setFirstName("Daniel");
 	people[2].setFirstName("Nicole");
@@ -32,17 +32,21 @@ int main(){
 
 	Bracket AMS(0,"AMS");
 
+	vector<pair<Player*, Player*>> vect;
+	pair<Player*, Player*> yoyoma(&people[1],nullptr);
+	pair<Player*, Player*> yoyomather(&people[7],nullptr);
+	vect.push_back(yoyoma);
+	vect.push_back(yoyomather);
+
 	for (int i = 0; i < 8; i++) {
 		AMS.insertPlayer(&people[i]);
 	}
 
-	cout << AMS.getSize() << endl;
-
-	//AMS.makeRoundRobin();
+	AMS.setSeeds(vect);
 
     AMS.makeElimination();
 
-	for (int j = 0; j < 8; j++) {
+	for (int j = 0; j < 4; j++) {
 		AMS.printMatch(j);
 	}
 	return 0;

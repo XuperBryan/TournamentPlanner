@@ -24,11 +24,10 @@ public:
 	void insertPlayer(Player* person);
 	void progress();	// move player*s "up" the bracket, updates the bracket?
 	void setScore(std::vector<std::pair<int, int>> points, int matchNum);
-	void makeCons(std::vector<std::pair<Player*, Player*>>);
-	void setSeeds(std::vector<std::pair<Player*, Player*>>);
+	void makeCons(std::vector<std::pair<Player*, Player*>> vect);
+	void setSeeds(std::vector<std::pair<Player*, Player*>> vect);
 	void printMatch(int num);
     int seeding(int seed, int size);
-
 private:
 	void shuffle();
 
@@ -48,6 +47,15 @@ private:
 			winner.first = nullptr;
 			winner.second = nullptr;
 			sets = 0;
+		}
+
+		Match(std::pair<Player*, Player*> team1, std::pair<Player*, Player*> team2, int sets) {
+			points = {std::pair<int, int>(0,0)};
+			this->team1 = team1;
+			this->team1 = team2;
+			winner.first = nullptr;
+			winner.second = nullptr;
+			this->sets = sets;
 		}
 
 		/*~Match() {
