@@ -20,25 +20,24 @@ int main(){
 		cout << vects[j] << endl;
 	}*/
 
-	Player people [8];
+	Player people [6];
 	people[0].setFirstName("Henry");
 	people[1].setFirstName("Daniel");
 	people[2].setFirstName("Nicole");
 	people[3].setFirstName("Martin");
 	people[4].setFirstName("Karissa");
 	people[5].setFirstName("Marc");
-	people[6].setFirstName("Tony");
-	people[7].setFirstName("Bryan");
+	//people[6].setFirstName("Tony");
 
 	Bracket AMS(0,"AMS");
 
 	vector<pair<Player*, Player*>> vect;
 	pair<Player*, Player*> yoyoma(&people[1],nullptr);
-	pair<Player*, Player*> yoyomather(&people[7],nullptr);
+	//pair<Player*, Player*> yoyomather(&people[5],nullptr);
 	vect.push_back(yoyoma);
-	vect.push_back(yoyomather);
+	//vect.push_back(yoyomather);
 
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 6; i++) {
 		AMS.insertPlayer(&people[i]);
 	}
 

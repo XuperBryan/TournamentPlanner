@@ -12,6 +12,17 @@ Player::Player() {
     this->events = {""};
 }
 
+Player::Player(string firstName) {
+    this->firstName = firstName;
+    this->lastName = "";
+    this->gender = "";
+    this->age = 0;
+    this->club = "";
+    this->phone = 0;
+    this->email = "";
+    this->events = {""};
+}
+
 Player::Player(std::string firstName, std::string lastName, std::string gender, 
                 int age, std::string club, int phone, std::string email, 
                 std::vector<std::string> events) {

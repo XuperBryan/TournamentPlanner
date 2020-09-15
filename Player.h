@@ -8,6 +8,7 @@
 class Player {
 	public:
 		Player();
+		Player(std::string firstName);
 		Player(std::string firstName, std::string lastName, std::string gender, int age, std::string club, int phone, std::string email, std::vector<std::string> events);
 		Player(const Player& orig);
 		~Player();

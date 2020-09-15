@@ -8,11 +8,15 @@ using namespace std;
 Bracket::Bracket(int size, std::string event){
 	this->size = size;
 	this->event = event;
+	bye1.setFirstName("Bye");
+	bye2.setFirstName("Bye");
 }
 
 Bracket::Bracket(const Bracket& orig){
 	size = orig.size;
 	event = orig.event;
+	bye1.setFirstName("Bye");
+	bye2.setFirstName("Bye");
 }
 
 Bracket::~Bracket(){
@@ -58,15 +62,11 @@ void Bracket::makeElimination(){
 	// size = 4, 8, 16, 32
 	// b.size() = <2, <4, <8, <16  
 	
-    int byes = 0;
-    pair<Player*, Player*> bye;
-
-    if(size > p.size()) {
-        byes = size - p.size();
-    }
+    int byes = size - p.size() - seeds.size() + 1;
 
     vector<pair<Player*, Player*>> firstMatches;
 
+    // fills firstMatches with nullptrs
     for(int w = 0; w < size; w++) {
     	pair<Player*, Player*> temp(nullptr, nullptr);
     	firstMatches.push_back(temp);
@@ -75,32 +75,34 @@ void Bracket::makeElimination(){
     for(int i = 1; i < seeds.size(); i++) {
         firstMatches.at(seeding(i, size)) = seeds.at(i);
         if (byes > 0) {
-        	firstMatches.at(seeding(i, size)+1) = bye;
+        	firstMatches.at(seeding(i, size)+1).first = &bye1;
+        	firstMatches.at(seeding(i, size)+1).second = &bye2;
         	byes--;
         }
     }
 
-    while(byes > 0) {
-        for(int i = 0; i < firstMatches.size(); i+=2) {
-            if(!firstMatches[i].first) {
-                firstMatches.at(i) = bye;
-                byes--;
-            }
+    for(int i = 1; i < firstMatches.size() && byes > 0; i+=2) {
+        if(!firstMatches[i].first) {
+            firstMatches[i].first = &bye1;
+            firstMatches[i].second = &bye2;
+            byes--;
         }
     }
 
     random_shuffle(p.begin(), p.end()); // shuffles the player*s
 
-    for(int k = 0; k < p.size(); k++) {
-        for(int i = 0; i < firstMatches.size(); i++){
-            if(&firstMatches[i] != &bye && !(firstMatches[i].first)) {
-                firstMatches[i] = p[k];
-                p.erase(p.begin());
-            }
+    int tsize = p.size();
+
+    // nested for loop adds in the rest of the players into the bracket
+    for(int i = 0; i < firstMatches.size() && p.size() > 0; i++){
+        if(!(firstMatches[i].first)) {
+            firstMatches[i] = p[0];
+            p.erase(p.begin());
         }
-	}
+    }
 
 	/*for(int t = 0; t < firstMatches.size(); t++) {
+		cout << t << endl;
 		cout << firstMatches[t].first->getFirstName() << endl;
 	}*/
 

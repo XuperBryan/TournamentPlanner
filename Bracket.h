@@ -76,5 +76,7 @@ private:
 	std::vector<std::pair<Player*, Player*>> p;
 	std::string type = "roundRobin"; // "roundRobin" or "elimination"
 	std::vector<std::pair<Player*, Player*>> seeds; 
+
+	Player bye1, bye2;
 };
 #endif
