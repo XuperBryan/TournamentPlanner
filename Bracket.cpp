@@ -210,6 +210,8 @@ void Bracket::printMatch(int num) {	// prints using the match number which signi
 	Match* m = &b[num];
 
 	// prints the names of the first team, if statement prevents the second name from being printed if its a signles event
+	cout << "Match " << num << '\n';
+	
 	cout << (m->team1.first->getFullName()) << '\n';
 	if (m->team1.second) {
 		cout << (m->team1.second->getFullName()) << '\n';
