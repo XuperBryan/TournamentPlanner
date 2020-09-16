@@ -51,7 +51,16 @@ int main(){
 
 
     vector<pair<int, int>> points;
-    points.push_back(
-	return 0;
+    pair<int, int> set1(21, 1);
+    pair<int, int> set2(1, 21);
+    pair<int, int> set3(21, 19);
+
+    points.push_back(set1);
+    points.push_back(set2);
+    points.push_back(set3);
+
+    AMS.setScore(points, 1);
+	
+    return 0;
 }
 
