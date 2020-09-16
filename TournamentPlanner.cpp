@@ -45,10 +45,6 @@ int main(){
 
     AMS.makeElimination();
 
-	for (int j = 0; j < 4; j++) {
-		AMS.printMatch(j);
-	}
-
 
     vector<pair<int, int>> points;
     pair<int, int> set1(21, 1);
@@ -61,6 +57,9 @@ int main(){
 
     AMS.setScore(points, 1);
 	
+	for (int j = 0; j < 4; j++) {
+		AMS.printMatch(j);
+	}
     return 0;
 }
 
