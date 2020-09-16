@@ -48,6 +48,10 @@ int main(){
 	for (int j = 0; j < 4; j++) {
 		AMS.printMatch(j);
 	}
+
+
+    vector<pair<int, int>> points;
+    points.push_back(
 	return 0;
 }
 

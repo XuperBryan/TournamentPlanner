@@ -155,8 +155,8 @@ void Bracket::setScore(std::vector<std::pair<int, int>> points, int matchNum){
 	// set score code here
 	// set winner code here
 
-	/*if(getType.equals("roundRobin")){
-		for(int i = 0; i < b.size(); b++){
+	/*if(type.equals("roundRobin")){
+		for(int i = 0; i < b.size(); i++){
 			Pair<Player*,Player*> winners;
 			for(int j = 0; j < p.size(); j++){
 				if(b[i].winner == p[j]){ // general idea of code
@@ -166,6 +166,24 @@ void Bracket::setScore(std::vector<std::pair<int, int>> points, int matchNum){
 			}
 		}
 	}*/
+
+        int t1 = 0;
+        int t2 = 0;
+
+        for(int i = 0; i < points.size(); i++) {
+            if(points[i].first > points[i].second) {
+                t1++;
+            } else if (points[i].first < points[i].second) {
+                t2++;
+            }
+        }
+
+        if(t1 > t2) {
+            b[matchNum].winner = b[matchNum].team1;
+        } else {
+            b[matchNum].winner = b[matchNum].team2;
+        }
+
 }
 
 void Bracket::makeCons(std::vector<std::pair<Player*, Player*>> vect) {
