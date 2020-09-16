@@ -166,6 +166,9 @@ void Bracket::setScore(std::vector<std::pair<int, int>> points, int matchNum){
 			}
 		}
 	}*/
+	
+	b[matchNum].points = points;
+	
 
         int t1 = 0;
         int t2 = 0;
