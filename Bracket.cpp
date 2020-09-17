@@ -231,6 +231,11 @@ void Bracket::printMatch(int num) {	// prints using the match number which signi
 		cout << (m->points[i].first) << ':' << (m->points[i].second) << endl;
 	}
 	
-	cout << "Winner: " << m.winner << endl;
+	if(m->winner) {
+		cout << "Winner: " << m->winner.first->getFullName();
+		if(m->winner.second) 
+			cout << ", " << m->winner.second->getFullName();
+	}
+	
 	return;
 }
