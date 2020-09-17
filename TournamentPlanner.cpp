@@ -26,6 +26,7 @@ int main(){
 	people[2].setFirstName("Nicole");
 	people[3].setFirstName("Martin");
 	people[4].setFirstName("Karissa");
+    people[4].setLastName("Chan");
 	people[5].setFirstName("Marc");
 	//people[6].setFirstName("Tony");
 
@@ -48,18 +49,15 @@ int main(){
 
     vector<pair<int, int>> points;
     pair<int, int> set1(21, 1);
-    pair<int, int> set2(1, 21);
-    pair<int, int> set3(21, 19);
+    pair<int, int> set2(21, 19);
 
     points.push_back(set1);
     points.push_back(set2);
-    points.push_back(set3);
 
-    AMS.setScore(points, 1);
+    AMS.setScore(points, 2);
 	
 	for (int j = 0; j < 4; j++) {
 		AMS.printMatch(j);
-		cout << endl;
 	}
     return 0;
 }

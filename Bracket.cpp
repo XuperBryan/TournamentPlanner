@@ -213,29 +213,44 @@ void Bracket::printMatch(int num) {	// prints using the match number which signi
 	Match* m = &b[num];
 
 	// prints the names of the first team, if statement prevents the second name from being printed if its a signles event
-	cout << "Match " << (num+1) << '\n';
+	cout << "Match " << (num+1) << " ";
+
 	
-	cout << (m->team1.first->getFullName()) << '\n';
-	if (m->team1.second) {
-		cout << (m->team1.second->getFullName()) << '\n';
+	if(m->winner.first != nullptr) {
+		cout << "(" << m->winner.first->getFullName();
+		if(m->winner.second != nullptr) 
+			cout << ", " << m->winner.second->getFullName();
+
+        cout << ")";
 	}
 
-	// same as top but for second team
-	cout << (m->team2.first->getFullName()) << '\n';
-	if (m->team2.second) {
-		cout << (m->team2.second->getFullName()) << '\n';
+    cout << endl;
+	cout << "Team 1: " << (m->team1.first->getFullName());
+	if (m->team1.second) {
+		cout << ", " << (m->team1.second->getFullName());
 	}
+    
+    cout << endl;
+
+	// same as top but for second team
+	if(m->team2.first->getFullName() != "Bye ") {
+        cout << "Team 2: " << (m->team2.first->getFullName());
+	    if (m->team2.second) {
+		    cout << ", " << (m->team2.second->getFullName());
+	    }
+    }
+
+	if(m->team2.first->getFirstName() == "Bye") {
+        cout << "Team 2: " << (m->team2.first->getFirstName());
+    }
+    cout << endl;
 
 	// prints out the scores for each set
 	for (int i = 0; i < m->sets; i++) {
-		cout << (m->points[i].first) << ':' << (m->points[i].second) << endl;
+		if(m->points[i].first != 0 && m->points[i].second != 0) 
+            cout << (m->points[i].first) << ':' << (m->points[i].second) << endl;
 	}
-	
-	if(m->winner) {
-		cout << "Winner: " << m->winner.first->getFullName();
-		if(m->winner.second) 
-			cout << ", " << m->winner.second->getFullName();
-	}
+    cout << endl;
 	
 	return;
 }
