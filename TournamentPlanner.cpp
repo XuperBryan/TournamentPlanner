@@ -59,6 +59,7 @@ int main(){
 	
 	for (int j = 0; j < 4; j++) {
 		AMS.printMatch(j);
+		cout << endl;
 	}
     return 0;
 }
