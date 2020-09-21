@@ -37,6 +37,7 @@ private:
 		std::pair<Player*, Player*> team2;
 		std::pair<Player*, Player*> winner;
 		int sets;
+		Match *nextMatch;
 
 		Match() {
 			points = {std::pair<int, int>(0,0)};
@@ -47,6 +48,7 @@ private:
 			winner.first = nullptr;
 			winner.second = nullptr;
 			sets = 0;
+			nextMatch = nullptr;
 		}
 
 		Match(std::pair<Player*, Player*> team1, std::pair<Player*, Player*> team2, int sets) {
@@ -56,6 +58,7 @@ private:
 			winner.first = nullptr;
 			winner.second = nullptr;
 			this->sets = sets;
+			nextMatch = nullptr;
 		}
 
 		/*~Match() {

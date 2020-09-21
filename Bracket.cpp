@@ -117,6 +117,19 @@ void Bracket::makeElimination(){
 	}
 
 	type = "elimination";
+	
+	// pushes the rest of the matches onto b
+	for(int i = firstMatches.size(); i < size-1; i++){
+		Match m;
+		m.sets = 3;
+		b.push_back(m);
+	}
+
+	// sets all match's next match 
+	int tempSize = size/2; 
+	for(int i = 0; i < size-2; i++){
+		b[i].nextMatch = &b[i/2 + tempSize];
+	}
 	return;
 }
 
@@ -147,45 +160,48 @@ void Bracket::insertPlayer(Player* person) {
 }
 
 // move players "up" the bracket, updates the bracket
+// start is where the Bracket should start calling from
 void Bracket::progress(){
-
+	for(int i = 0; i < size-1; i++){ // size-2 should be index of last match
+		if(b[i].winner.first != NULL && b[i].team1.first != NULL && b[i].team2.first != NULL){ 
+			cout << "checking index " << i << endl;
+			if(i%2==0){ // even index, uses first team
+				if(b.at(i).nextMatch->team1.first==NULL){
+					b.at(i).nextMatch->team1.first = b.at(i).winner.first;
+					b.at(i).nextMatch->team1.second = b.at(i).winner.second;
+				}
+			} else if(i%2==1){ // odd index, uses second team
+				if(b.at(i).nextMatch->team2.first==NULL){
+					b.at(i).nextMatch->team2.first = b.at(i).winner.first;
+					b.at(i).nextMatch->team2.second = b.at(i).winner.second;
+				}
+			}
+			cout << "finished checking index " << i << endl;
+		}
+	}
 }
 
+// sets the scoure of the matchNum match
 void Bracket::setScore(std::vector<std::pair<int, int>> points, int matchNum){
-	// set score code here
-	// set winner code here
-
-	/*if(type.equals("roundRobin")){
-		for(int i = 0; i < b.size(); i++){
-			Pair<Player*,Player*> winners;
-			for(int j = 0; j < p.size(); j++){
-				if(b[i].winner == p[j]){ // general idea of code
-					p[j].matchWins++;
-				}
-
-			}
-		}
-	}*/
-	
 	b[matchNum].points = points;
 	
 
-        int t1 = 0;
-        int t2 = 0;
+    int t1 = 0;
+    int t2 = 0;
 
-        for(int i = 0; i < points.size(); i++) {
-            if(points[i].first > points[i].second) {
-                t1++;
-            } else if (points[i].first < points[i].second) {
-                t2++;
-            }
+    for(int i = 0; i < points.size(); i++) {
+        if(points[i].first > points[i].second) {
+            t1++;
+        } else if (points[i].first < points[i].second) {
+            t2++;
         }
+    }
 
-        if(t1 > t2) {
-            b[matchNum].winner = b[matchNum].team1;
-        } else {
-            b[matchNum].winner = b[matchNum].team2;
-        }
+    if(t1 > t2) {
+        b[matchNum].winner = b[matchNum].team1;
+    } else {
+        b[matchNum].winner = b[matchNum].team2;
+    }
 
 }
 
