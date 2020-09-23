@@ -5,6 +5,7 @@
 using namespace std;
 
 
+
 Bracket::Bracket(int size, std::string event){
 	this->size = size;
 	this->event = event;
