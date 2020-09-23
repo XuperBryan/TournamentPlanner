@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 int main(){
 	/*Player p("Hehe", "Haha", "Green", -489527, "Club Penguin", 4, "thisisdumb@dumb.com", 10000, {"A","B","C"});
 	vector<string> vect = p.getEvents();
