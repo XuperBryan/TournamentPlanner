@@ -120,7 +120,7 @@ void Bracket::makeElimination(){
 	type = "elimination";
 	
 	// pushes the rest of the matches onto b
-	for(int i = firstMatches.size(); i < size-1; i++){
+	for(int i = firstMatches.size()/2; i < size-1; i++){
 		Match m;
 		m.sets = 3;
 		b.push_back(m);
@@ -165,19 +165,19 @@ void Bracket::insertPlayer(Player* person) {
 void Bracket::progress(){
 	for(int i = 0; i < size-1; i++){ // size-2 should be index of last match
 		if(b[i].winner.first != NULL && b[i].team1.first != NULL && b[i].team2.first != NULL){ 
-			cout << "checking index " << i << endl;
+			//cout << "checking index " << i << endl;
 			if(i%2==0){ // even index, uses first team
 				if(b.at(i).nextMatch->team1.first==NULL){
 					b.at(i).nextMatch->team1.first = b.at(i).winner.first;
 					b.at(i).nextMatch->team1.second = b.at(i).winner.second;
 				}
-			} else if(i%2==1){ // odd index, uses second team
+			} else { // odd index, uses second team
 				if(b.at(i).nextMatch->team2.first==NULL){
 					b.at(i).nextMatch->team2.first = b.at(i).winner.first;
 					b.at(i).nextMatch->team2.second = b.at(i).winner.second;
 				}
 			}
-			cout << "finished checking index " << i << endl;
+			//cout << "finished checking index " << i << endl;
 		}
 	}
 }
@@ -241,6 +241,11 @@ void Bracket::printMatch(int num) {	// prints using the match number which signi
         cout << ")";
 	}
 
+	if (!(m->team1.first)) {
+		cout << "Uninitialized Team 1" << endl;
+		return;
+	}
+
     cout << endl;
 	cout << "Team 1: " << (m->team1.first->getFullName());
 	if (m->team1.second) {
@@ -250,6 +255,10 @@ void Bracket::printMatch(int num) {	// prints using the match number which signi
     cout << endl;
 
 	// same as top but for second team
+	if (!(m->team2.first)) {
+		cout << "Uninitialized Team 2" << endl;
+		return;
+	}
 	if(m->team2.first->getFullName() != "Bye ") {
         cout << "Team 2: " << (m->team2.first->getFullName());
 	    if (m->team2.second) {
@@ -268,6 +277,5 @@ void Bracket::printMatch(int num) {	// prints using the match number which signi
             cout << (m->points[i].first) << ':' << (m->points[i].second) << endl;
 	}
     cout << endl;
-	
 	return;
 }
