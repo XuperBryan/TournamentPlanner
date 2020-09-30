@@ -45,8 +45,7 @@ void Bracket::makeRoundRobin(){
 	// b.size() = n * n-1
 	Match m;
 	for(int i = 0; i < p.size(); i++) {
-
-for(int j = i+1; j < p.size(); j++) {
+		for(int j = i+1; j < p.size(); j++) {
 			m.team1 = p[i];
 			m.team2 = p[j];
 			m.sets = 3;
@@ -159,7 +158,6 @@ void Bracket::insertPlayer(Player* person) {
 }
 
 // move players "up" the bracket, updates the bracket
-// start is where the Bracket should start calling from
 void Bracket::progress(){
 	for(int i = 0; i < size-1; i++){ // size-2 should be index of last match
 		if(b[i].winner.first != NULL && b[i].team1.first != NULL && b[i].team2.first != NULL){ 
@@ -277,3 +275,4 @@ void Bracket::printMatch(int num) {	// prints using the match number which signi
     cout << endl;
 	return;
 }
+
